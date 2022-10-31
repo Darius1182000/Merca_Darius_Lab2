@@ -22,6 +22,27 @@ namespace Merca_Darius_Lab2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Merca_Darius_Lab2.Models.Author", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Authors");
+                });
+
             modelBuilder.Entity("Merca_Darius_Lab2.Models.Book", b =>
                 {
                     b.Property<int>("ID")
@@ -30,9 +51,8 @@ namespace Merca_Darius_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<string>("Author")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AuthorID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
@@ -42,6 +62,8 @@ namespace Merca_Darius_Lab2.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AuthorID");
 
                     b.ToTable("Book", (string)null);
                 });
@@ -93,6 +115,17 @@ namespace Merca_Darius_Lab2.Migrations
                     b.ToTable("Order", (string)null);
                 });
 
+            modelBuilder.Entity("Merca_Darius_Lab2.Models.Book", b =>
+                {
+                    b.HasOne("Merca_Darius_Lab2.Models.Author", "Author")
+                        .WithMany("Books")
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+                });
+
             modelBuilder.Entity("Merca_Darius_Lab2.Models.Order", b =>
                 {
                     b.HasOne("Merca_Darius_Lab2.Models.Book", "Book")
@@ -110,6 +143,11 @@ namespace Merca_Darius_Lab2.Migrations
                     b.Navigation("Book");
 
                     b.Navigation("Customer");
+                });
+
+            modelBuilder.Entity("Merca_Darius_Lab2.Models.Author", b =>
+                {
+                    b.Navigation("Books");
                 });
 
             modelBuilder.Entity("Merca_Darius_Lab2.Models.Book", b =>
