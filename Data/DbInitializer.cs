@@ -32,40 +32,45 @@ namespace Merca_Darius_Lab2.Data
                   */
 
 
-            /*       context.Authors.AddRange(
-                   new Author {  FirstName = "Mihail", LastName = "Sadoveanu" },
-                   new Author {  FirstName = "George", LastName = "Calinescu" }
-                   ) ;
+                /*       context.Authors.AddRange(
+                       new Author {  FirstName = "Mihail", LastName = "Sadoveanu" },
+                       new Author {  FirstName = "George", LastName = "Calinescu" }
+                       ) ;
 
-               context.SaveChanges(); */
-            /*
-                context.Books.AddRange(
-                    new Book
-                    {
-                        Title = "Baltagul1",
-                        Price = decimal.Parse("22"),
-                      //  AuthorID = context.Authors.Single(author => author.LastName == "Sadoveanu").ID
-                      //  Authors = context.Authors.Single(author => author.ID == 1).FirstName
-                        Author = context.Authors.Single(author => author.LastName == "Sadoveanu")
-
-
-
-                    },
+                   context.SaveChanges(); */
+                /*
+                    context.Books.AddRange(
+                        new Book
+                        {
+                            Title = "Baltagul1",
+                            Price = decimal.Parse("22"),
+                          //  AuthorID = context.Authors.Single(author => author.LastName == "Sadoveanu").ID
+                          //  Authors = context.Authors.Single(author => author.ID == 1).FirstName
+                            Author = context.Authors.Single(author => author.LastName == "Sadoveanu")
 
 
-                     new Book
-                     {
-                         Title = "Enigma Otiliei",
-                         Price = decimal.Parse("18"),
-                         // AuthorID = context.Authors.Single(author => author.LastName == "Calinescu").ID
-                         //Author = "GeorgeCalinescu"
-                         Author = context.Authors.Single(author => author.LastName == "Calinescu")
 
-                     }
+                        },
 
 
-                 ) ; */
-                context.Customers.AddRange(
+                         new Book
+                         {
+                             Title = "Enigma Otiliei",
+                             Price = decimal.Parse("18"),
+                             // AuthorID = context.Authors.Single(author => author.LastName == "Calinescu").ID
+                             //Author = "GeorgeCalinescu"
+                             Author = context.Authors.Single(author => author.LastName == "Calinescu")
+
+                         }
+
+
+                     ) ; */
+                
+
+                context.SaveChanges();
+              
+
+                 context.Customers.AddRange(
                 new Customer { Name = "Popescu Marcela", Adress = "Str. Plopilor, nr. 24", BirthDate = DateTime.Parse("1979-09-01") },
                 new Customer { Name = "Mihailescu Cornel", Adress = "Str. Bucuresti, nr.45,ap. 2", BirthDate = DateTime.Parse("1969 - 07 - 08") });
                 context.SaveChanges();
