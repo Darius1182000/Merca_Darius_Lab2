@@ -104,8 +104,8 @@ namespace Merca_Darius_Lab2.Controllers
                 x.ID,
                 FullName = x.FirstName + " " + x.LastName
             });
-              ViewData["AuthorID"] = new SelectList(authors, "ID", "FullName");
-          //  ViewBag.authors = new SelectList(_context.Authors, "ID", "LastName");
+            // ViewData["AuthorID"] = new SelectList(authors, "ID", "FullName");
+             ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "LastName");
             return View();
                
         }
@@ -115,26 +115,18 @@ namespace Merca_Darius_Lab2.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Title,Author,Price")] Book book)
+        public async Task<IActionResult> Create([Bind("ID,Title,AuthorID,Price")] Book book)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    //   _context.Add(book);
-                    _context.Books.Add(book);
-                    await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
-                }
-            }
-            catch (DbUpdateException/*ex*/)
-            {
-                ModelState.AddModelError("", "Unable to save changes." + "Try again, and if the problem persist");
+                _context.Add(book);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
             ViewData["AuthorID"] = new SelectList(_context.Authors, "ID", "ID", book.AuthorID);
-
             return View(book);
         }
+    
 
         // GET: Books/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -167,7 +159,7 @@ namespace Merca_Darius_Lab2.Controllers
                 return NotFound();
             }
             var bookToUpdate = await _context.Books.FirstOrDefaultAsync(s => s.ID == id);
-            if (await TryUpdateModelAsync<Book>(bookToUpdate,"",s => s.Author, s => s.Title, s => s.Price))
+            if (await TryUpdateModelAsync<Book>(bookToUpdate, "", s => s.Author, s => s.Title, s => s.Price))
             {
                 try
                 {
