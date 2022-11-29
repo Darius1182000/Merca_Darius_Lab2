@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace LibraryModel.Migrations
+namespace Merca_Darius_Lab2.Migrations
 {
     public partial class InitialCreate : Migration
     {
