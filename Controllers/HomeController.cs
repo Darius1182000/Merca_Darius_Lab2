@@ -1,10 +1,13 @@
-﻿using Merca_Darius_Lab2.Models;
+﻿using LibraryModel.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
-using Merca_Darius_Lab2.Data;
-using Merca_Darius_Lab2.Models.LibraryViewModels;
+using LibraryModel.Data;
+using LibraryModel.Models.LibraryViewModels;
+//using Merca_Darius_Lab2.Models;
+//using Merca_Darius_Lab2.Models.LibraryViewModels;
 
+//namespace LibraryModel.Controllers
 namespace Merca_Darius_Lab2.Controllers
 {
     public class HomeController : Controller
