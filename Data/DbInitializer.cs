@@ -1,6 +1,5 @@
-﻿//using LibraryModel.Controllers;
-using LibraryModel.Models;
-using LibraryModel.Data;
+﻿using Merca_Darius_Lab2.Controllers;
+using Merca_Darius_Lab2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -8,12 +7,8 @@ using static NuGet.Packaging.PackagingConstants;
 using static System.Reflection.Metadata.BlobBuilder;
 using System.Runtime.ConstrainedExecution;
 using System.Security.Policy;
-using Publisher = LibraryModel.Models.Publisher;
-using Merca_Darius_Lab2.Controllers;
-//using Merca_Darius_Lab2.Models;
-//using Publisher = Merca_Darius_Lab2.Models.Publisher;
+using Publisher = Merca_Darius_Lab2.Models.Publisher;
 
-//namespace LibraryModel.Data
 namespace Merca_Darius_Lab2.Data
 {
     public static class DbInitializer
