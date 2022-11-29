@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Merca_Darius_Lab2.Data;
-using Merca_Darius_Lab2.Models;
+using LibraryModel.Data;
+using LibraryModel.Models;
+//using Merca_Darius_Lab2.Data;
+//using Merca_Darius_Lab2.Models;
 
+//namespace LibraryModel.Controllers
 namespace Merca_Darius_Lab2.Controllers
 {
     public class BooksController : Controller

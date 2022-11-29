@@ -1,5 +1,6 @@
-using Merca_Darius_Lab2.Data;
+using LibraryModel.Data;
 using Microsoft.EntityFrameworkCore;
+using Merca_Darius_Lab2.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

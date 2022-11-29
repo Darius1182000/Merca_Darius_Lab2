@@ -10,89 +10,88 @@ using LibraryModel.Models;
 //using Merca_Darius_Lab2.Data;
 //using Merca_Darius_Lab2.Models;
 
-
-//namespace LibraryModel.Controllers
 namespace Merca_Darius_Lab2.Controllers
+//namespace Merca_Darius_Lab2.Controllers
 {
-    public class AuthorsController : Controller
+    public class CitiesController : Controller
     {
         private readonly LibraryContext _context;
 
-        public AuthorsController(LibraryContext context)
+        public CitiesController(LibraryContext context)
         {
             _context = context;
         }
 
-        // GET: Authors
+        // GET: Cities
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Authors.ToListAsync());
+              return View(await _context.Cities.ToListAsync());
         }
 
-        // GET: Authors/Details/5
+        // GET: Cities/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Cities == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors
+            var city = await _context.Cities
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (author == null)
+            if (city == null)
             {
                 return NotFound();
             }
 
-            return View(author);
+            return View(city);
         }
 
-        // GET: Authors/Create
+        // GET: Cities/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Authors/Create
+        // POST: Cities/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,LastName")] Author author)
+        public async Task<IActionResult> Create([Bind("ID,CityName")] City city)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(author);
+                _context.Add(city);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(author);
+            return View(city);
         }
 
-        // GET: Authors/Edit/5
+        // GET: Cities/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Cities == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors.FindAsync(id);
-            if (author == null)
+            var city = await _context.Cities.FindAsync(id);
+            if (city == null)
             {
                 return NotFound();
             }
-            return View(author);
+            return View(city);
         }
 
-        // POST: Authors/Edit/5
+        // POST: Cities/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,FirstName,LastName")] Author author)
+        public async Task<IActionResult> Edit(int? id, [Bind("ID,CityName")] City city)
         {
-            if (id != author.ID)
+            if (id != city.ID)
             {
                 return NotFound();
             }
@@ -101,12 +100,12 @@ namespace Merca_Darius_Lab2.Controllers
             {
                 try
                 {
-                    _context.Update(author);
+                    _context.Update(city);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AuthorExists(author.ID))
+                    if (!CityExists(city.ID))
                     {
                         return NotFound();
                     }
@@ -117,49 +116,49 @@ namespace Merca_Darius_Lab2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(author);
+            return View(city);
         }
 
-        // GET: Authors/Delete/5
+        // GET: Cities/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Authors == null)
+            if (id == null || _context.Cities == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Authors
+            var city = await _context.Cities
                 .FirstOrDefaultAsync(m => m.ID == id);
-            if (author == null)
+            if (city == null)
             {
                 return NotFound();
             }
 
-            return View(author);
+            return View(city);
         }
 
-        // POST: Authors/Delete/5
+        // POST: Cities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int? id)
         {
-            if (_context.Authors == null)
+            if (_context.Cities == null)
             {
-                return Problem("Entity set 'LibraryContext.Authors'  is null.");
+                return Problem("Entity set 'LibraryContext.Cities'  is null.");
             }
-            var author = await _context.Authors.FindAsync(id);
-            if (author != null)
+            var city = await _context.Cities.FindAsync(id);
+            if (city != null)
             {
-                _context.Authors.Remove(author);
+                _context.Cities.Remove(city);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool AuthorExists(int id)
+        private bool CityExists(int? id)
         {
-          return _context.Authors.Any(e => e.ID == id);
+          return _context.Cities.Any(e => e.ID == id);
         }
     }
 }
