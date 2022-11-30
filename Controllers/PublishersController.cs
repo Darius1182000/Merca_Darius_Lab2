@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Merca_Darius_Lab2.Data;
-using Merca_Darius_Lab2.Models;
-using Merca_Darius_Lab2.Models.LibraryViewModels;
+using LibraryModel.Data;
+using LibraryModel.Models;
+using LibraryModel.Models.LibraryViewModels;
+//using Merca_Darius_Lab2.Models;
+//using Merca_Darius_Lab2.Models.LibraryViewModels;
 
+//namespace LibraryModel.Controllers
 namespace Merca_Darius_Lab2.Controllers
 {
     public class PublishersController : Controller

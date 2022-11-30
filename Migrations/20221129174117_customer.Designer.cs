@@ -9,12 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-//namespace LibraryModel.Migrations
 namespace Merca_Darius_Lab2.Migrations
 {
     [DbContext(typeof(LibraryContext))]
-    [Migration("20221108161220_ExtendedModel")]
-    partial class ExtendedModel
+    [Migration("20221129174117_customer")]
+    partial class customer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +24,7 @@ namespace Merca_Darius_Lab2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Author", b =>
+            modelBuilder.Entity("LibraryModel.Models.Author", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -41,10 +40,10 @@ namespace Merca_Darius_Lab2.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Authors");
+                    b.ToTable("Authors", (string)null);
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Book", b =>
+            modelBuilder.Entity("LibraryModel.Models.Book", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -52,7 +51,7 @@ namespace Merca_Darius_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int>("AuthorID")
+                    b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("Price")
@@ -68,13 +67,29 @@ namespace Merca_Darius_Lab2.Migrations
                     b.ToTable("Book", (string)null);
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Customer", b =>
+            modelBuilder.Entity("LibraryModel.Models.City", b =>
                 {
-                    b.Property<int>("CustomerID")
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("CityName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("City", (string)null);
+                });
+
+            modelBuilder.Entity("LibraryModel.Models.Customer", b =>
+                {
+                    b.Property<int?>("CustomerID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("CustomerID"), 1L, 1);
 
                     b.Property<string>("Adress")
                         .HasColumnType("nvarchar(max)");
@@ -82,15 +97,20 @@ namespace Merca_Darius_Lab2.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CityID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CustomerID");
 
+                    b.HasIndex("CityID");
+
                     b.ToTable("Customer", (string)null);
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Order", b =>
+            modelBuilder.Entity("LibraryModel.Models.Order", b =>
                 {
                     b.Property<int>("OrderID")
                         .ValueGeneratedOnAdd()
@@ -116,7 +136,7 @@ namespace Merca_Darius_Lab2.Migrations
                     b.ToTable("Order", (string)null);
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.PublishedBook", b =>
+            modelBuilder.Entity("LibraryModel.Models.PublishedBook", b =>
                 {
                     b.Property<int>("BookID")
                         .HasColumnType("int");
@@ -131,7 +151,7 @@ namespace Merca_Darius_Lab2.Migrations
                     b.ToTable("PublishedBook", (string)null);
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Publisher", b =>
+            modelBuilder.Entity("LibraryModel.Models.Publisher", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -153,26 +173,35 @@ namespace Merca_Darius_Lab2.Migrations
                     b.ToTable("Publisher", (string)null);
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Book", b =>
+            modelBuilder.Entity("LibraryModel.Models.Book", b =>
                 {
-                    b.HasOne("Merca_Darius_Lab2.Models.Author", "Author")
+                    b.HasOne("LibraryModel.Models.Author", "Author")
                         .WithMany("Books")
-                        .HasForeignKey("AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorID");
 
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Order", b =>
+            modelBuilder.Entity("LibraryModel.Models.Customer", b =>
                 {
-                    b.HasOne("Merca_Darius_Lab2.Models.Book", "Book")
+                    b.HasOne("LibraryModel.Models.City", "City")
+                        .WithMany("Customers")
+                        .HasForeignKey("CityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("LibraryModel.Models.Order", b =>
+                {
+                    b.HasOne("LibraryModel.Models.Book", "Book")
                         .WithMany("Orders")
                         .HasForeignKey("BookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Merca_Darius_Lab2.Models.Customer", "Customer")
+                    b.HasOne("LibraryModel.Models.Customer", "Customer")
                         .WithMany("Orders")
                         .HasForeignKey("CustomerID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -183,15 +212,15 @@ namespace Merca_Darius_Lab2.Migrations
                     b.Navigation("Customer");
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.PublishedBook", b =>
+            modelBuilder.Entity("LibraryModel.Models.PublishedBook", b =>
                 {
-                    b.HasOne("Merca_Darius_Lab2.Models.Book", "Book")
+                    b.HasOne("LibraryModel.Models.Book", "Book")
                         .WithMany("PublishedBooks")
                         .HasForeignKey("BookID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Merca_Darius_Lab2.Models.Publisher", "Publisher")
+                    b.HasOne("LibraryModel.Models.Publisher", "Publisher")
                         .WithMany("PublishedBooks")
                         .HasForeignKey("PublisherID")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -202,24 +231,29 @@ namespace Merca_Darius_Lab2.Migrations
                     b.Navigation("Publisher");
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Author", b =>
+            modelBuilder.Entity("LibraryModel.Models.Author", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Book", b =>
+            modelBuilder.Entity("LibraryModel.Models.Book", b =>
                 {
                     b.Navigation("Orders");
 
                     b.Navigation("PublishedBooks");
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Customer", b =>
+            modelBuilder.Entity("LibraryModel.Models.City", b =>
+                {
+                    b.Navigation("Customers");
+                });
+
+            modelBuilder.Entity("LibraryModel.Models.Customer", b =>
                 {
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Merca_Darius_Lab2.Models.Publisher", b =>
+            modelBuilder.Entity("LibraryModel.Models.Publisher", b =>
                 {
                     b.Navigation("PublishedBooks");
                 });
