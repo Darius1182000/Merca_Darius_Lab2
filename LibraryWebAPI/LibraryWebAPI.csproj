@@ -7,17 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20221031112953_InitialCreate.cs" />
-    <Compile Remove="Migrations\20221031112953_InitialCreate.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="LibraryWebAPI\LibraryWebAPI.csproj" />
-    <None Include="LibraryWebAPI\LibraryWebAPI.csproj.user" />
-    <None Include="wwwroot\js\chat.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.10">
@@ -25,18 +14,11 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.10" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\lb7\Merca_Darius_Lab2\LibraryModel\LibraryModel.csproj" />
     <ProjectReference Include="..\LibraryModel\LibraryModel.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="LibraryWebAPI\bin\Debug\net6.0\runtimes\browser\lib\net6.0\" />
-    <Folder Include="LibraryWebAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\" />
-    <Folder Include="LibraryWebAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\" />
-    <Folder Include="LibraryWebAPI\obj\Debug\net6.0\staticwebassets\" />
   </ItemGroup>
 
 </Project>
