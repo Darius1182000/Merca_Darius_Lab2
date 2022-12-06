@@ -8,9 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="LibraryModel\**" />
+    <Compile Remove="LibraryWebAPI\**" />
     <Content Remove="LibraryModel\**" />
+    <Content Remove="LibraryWebAPI\**" />
     <EmbeddedResource Remove="LibraryModel\**" />
+    <EmbeddedResource Remove="LibraryWebAPI\**" />
     <None Remove="LibraryModel\**" />
+    <None Remove="LibraryWebAPI\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,7 +33,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LibraryModel\LibraryModel.csproj" />
+    <ProjectReference Include="LibraryModel\LibraryModel.csproj" />
   </ItemGroup>
+
+  
 
 </Project>
