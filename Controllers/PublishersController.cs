@@ -8,12 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using LibraryModel.Data;
 using LibraryModel.Models;
 using LibraryModel.Models.LibraryViewModels;
+using Microsoft.AspNetCore.Authorization;
 //using Merca_Darius_Lab2.Models;
 //using Merca_Darius_Lab2.Models.LibraryViewModels;
 
 //namespace LibraryModel.Controllers
 namespace Merca_Darius_Lab2.Controllers
 {
+    [Authorize(Policy ="OnlySales")]
     public class PublishersController : Controller
     {
         private readonly LibraryContext _context;
