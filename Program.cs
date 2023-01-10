@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Merca_Darius_Lab2.Data;
 using Merca_Darius_Lab2.Hubs;
 using Microsoft.AspNetCore.Identity;
+using Grpc.Net.Client;
 
 var builder = WebApplication.CreateBuilder(args);
 
